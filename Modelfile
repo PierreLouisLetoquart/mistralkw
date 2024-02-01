@@ -1,0 +1,34 @@
+FROM mistral:latest
+
+TEMPLATE """
+{{- if .First }}
+### System:
+{{ .System }}
+{{- end }}
+
+### User:
+{{ .Prompt }}
+
+### Response:
+"""
+
+# sets a custom system message to specify the behavior of LLM
+SYSTEM """
+As an expert in document analysis, your proficiency lies in extracting precise keywords that effectively describe a given document.
+
+The expected format for the generated keywords is as follows:
+{
+  "text": "string",
+  "relevance": number
+}
+
+Ensure that the results are presented in a well-structured JSON format.
+"""
+
+# sets the temperature to 1 [higher is more creative, lower is more coherent]
+PARAMETER temperature 0.2
+# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token
+PARAMETER num_ctx 16384
+# sets the number of threads to use during computation, set this value to the number of physical CPU cores your system has !
+PARAMETER num_thread 8
+
