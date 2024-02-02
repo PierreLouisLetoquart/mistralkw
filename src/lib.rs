@@ -5,31 +5,61 @@ use std::fs;
 use std::path::PathBuf;
 
 #[derive(Parser)]
-#[command(author, version, about, long_about = None)]
+#[command(name = "Keywords Generator")]
+#[command(author = "Pierre-Louis L. <randlgint@proton.me>")]
+#[command(version = "1.0")]
+#[command(
+    about = "Generates keywords from a document using an Ollama model.",
+    long_about = None
+)]
 pub struct Cli {
-    #[arg(short, long)]
-    model_name: String,
+    #[arg(
+        short,
+        long,
+        value_name = "MODEL NAME",
+        help = "The model to use. Use 'ollama list' to list available models."
+    )]
+    model: String,
 
-    #[arg(short, long, value_name = "FILE")]
-    document_path: PathBuf,
+    #[arg(
+        short,
+        long,
+        value_name = "FILE",
+        help = "The document to generate keywords from."
+    )]
+    document: PathBuf,
+
+    #[arg(
+        short,
+        long,
+        value_name = "FILE",
+        help = "Output file, if not keywords are printed to stdout."
+    )]
+    output: Option<PathBuf>,
 }
 
 pub async fn gen_keywords(args: &Cli, ollama: &Ollama) -> Result<()> {
     let models_available = list_local_models(&ollama).await?;
 
-    check_model_availability(&args.model_name, &models_available)?;
+    check_model_availability(&args.model, &models_available)?;
 
-    let content = fs::read_to_string(&args.document_path)
-        .with_context(|| format!("Unable to read the file: {:?}", &args.document_path))?;
+    let content = fs::read_to_string(&args.document)
+        .with_context(|| format!("Unable to read the file: {:?}", &args.document))?;
 
     println!("Generating keywords...");
 
     let res = ollama
-        .generate(GenerationRequest::new(args.model_name.to_string(), content))
+        .generate(GenerationRequest::new(args.model.to_string(), content))
         .await
         .map_err(|err| anyhow::anyhow!("Unable to generate the document: {}", err))?;
 
-    println!("{}", res.response);
+    if let Some(output) = &args.output {
+        fs::write(output, &res.response)
+            .with_context(|| format!("Unable to write to the file: {:?}", output))?;
+        println!("Keywords generated and written to {:?}", output);
+    } else {
+        println!("{}", &res.response);
+    }
 
     Ok(())
 }
@@ -58,8 +88,9 @@ mod tests {
     #[tokio::test]
     async fn test_gen_keywords() {
         let args = Cli {
-            model_name: "test".to_string(),
-            document_path: PathBuf::from("test.txt"),
+            model: "test".to_string(),
+            document: PathBuf::from("test.txt"),
+            output: None,
         };
         let ollama = Ollama::default();
 
