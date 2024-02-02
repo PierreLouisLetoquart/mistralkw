@@ -300,16 +300,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "genkw"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap",
- "ollama-rs",
- "tokio",
-]
-
-[[package]]
 name = "gimli"
 version = "0.28.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -528,6 +518,16 @@ dependencies = [
  "libc",
  "wasi",
  "windows-sys 0.48.0",
+]
+
+[[package]]
+name = "mixtralkw"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "ollama-rs",
+ "tokio",
 ]
 
 [[package]]
