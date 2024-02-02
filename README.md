@@ -91,5 +91,5 @@ Check `src/main.rs` for the Rust implementation; a bit bad but feel free to PR ;
 To run the program, replace the following command with your args:
 
 ```bash
-cargo run -- <model-name> <doc-to-scan-path>
+cargo run -- -m MODEL -d DOC_PATH
 ```
