@@ -22,6 +22,8 @@ pub async fn gen_keywords(args: &Cli, ollama: &Ollama) -> Result<()> {
     let content = fs::read_to_string(&args.document_path)
         .with_context(|| format!("Unable to read the file: {:?}", &args.document_path))?;
 
+    println!("Generating keywords...");
+
     let res = ollama
         .generate(GenerationRequest::new(args.model_name.to_string(), content))
         .await
