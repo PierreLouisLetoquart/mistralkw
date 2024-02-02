@@ -1,6 +1,6 @@
 # mixtralkw
 
-![tabarnouche](./assets/ilIiLIIillL.png)
+![tabarnouche](./assets/IILiiiiIIIIiiLlllll.png)
 
 The simplest way to create your custom Mistral LLM. Let's build a keyword generator for your documents. It will be a simple Rust program that takes as input a text document and outputs a formatted list of keywords describing it.
 
@@ -29,7 +29,22 @@ ollama list
 Run the program with fake content :
 
 ```bash
-cargo run -- model-keyword:latest ./assets/content.md
+cargo run -- -m model-keyword:latest -d ./assets/content.md
+```
+
+Storing the result in a file :
+
+```bash
+cargo run -- \
+-m model-keyword:latest \
+-d ./assets/content.md \
+-o ./assets/keywords.json
+```
+
+To see available options :
+
+```bash
+cargo run -- --help
 ```
 
 ## 🔍 Explanations
@@ -76,6 +91,5 @@ Check `src/main.rs` for the Rust implementation; a bit bad but feel free to PR ;
 To run the program, replace the following command with your args:
 
 ```bash
-cargo run -- <model-name> <doc-to-scan-path>
+cargo run -- -m MODEL -d DOC_PATH
 ```
-
