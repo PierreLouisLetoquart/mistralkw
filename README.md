@@ -7,6 +7,7 @@ The simplest way to create your custom Mistral LLM. Let's build a keyword genera
 ## 🔗 Prerequisites
 
 https://www.rust-lang.org/
+
 https://ollama.ai/
 
 ## 🪄 Usage
