@@ -38,9 +38,9 @@ cargo run -- model-keyword:latest ./assets/content.md
 
 The simplest way to "finetune" an LLM and use it locally is Ollama. We will create a [Modelfile](https://github.com/ollama/ollama/blob/main/docs/modelfile.md) and create our custom LLM with the `ollama create` command.
 
-The `Modelfile` is super simple and can be modified depending on your use case.
+The `Modelfile` located in `./assets/` is a simple one and can be modified depending on your use case.
 
-Then run the following command:
+Then run the command to create the model:
 
 ```bash
 ollama create <model-name> -f </path/to/Modelfile>
