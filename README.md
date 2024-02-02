@@ -1,5 +1,7 @@
 # mixtralkw
 
+![tabarnouche](./assets/ilIiLIIillL.png)
+
 The simplest way to create your custom Mistral LLM. Let's build a keyword generator for your documents. It will be a simple Rust program that takes as input a text document and outputs a formatted list of keywords describing it.
 
 ## 🔗 Prerequisites
