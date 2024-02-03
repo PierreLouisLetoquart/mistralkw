@@ -1,3 +1,5 @@
+pub mod model;
+
 use anyhow::{bail, Context, Result};
 use clap::Parser;
 use ollama_rs::generation::format::FormatType;
