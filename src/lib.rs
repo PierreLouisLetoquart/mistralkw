@@ -1,5 +1,6 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
+use ollama_rs::generation::format::FormatType;
 use ollama_rs::{generation::completion::request::GenerationRequest, models::LocalModel, Ollama};
 use std::fs;
 use std::path::PathBuf;
@@ -49,7 +50,7 @@ pub async fn gen_keywords(args: &Cli, ollama: &Ollama) -> Result<()> {
     println!("Generating keywords...");
 
     let res = ollama
-        .generate(GenerationRequest::new(args.model.to_string(), content))
+        .generate(GenerationRequest::new(args.model.to_string(), content).format(FormatType::Json))
         .await
         .map_err(|err| anyhow::anyhow!("Unable to generate the document: {}", err))?;
 
