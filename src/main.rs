@@ -1,5 +1,5 @@
-use mixtralkw::Args;
-use mixtralkw::{generation, model};
+use mistralkw::Args;
+use mistralkw::{generation, model};
 
 use clap::Parser;
 use ollama_rs::Ollama;
