@@ -23,11 +23,13 @@ async fn main() {
     let models = model::list_local_models(&ollama).await.unwrap();
 
     if !model::check_model_availability(&args.model, &models).is_ok() {
+        println!("[INFO] creating local model {} usind Modelfile", &args.model);
         let _ = model::create_model(&ollama, &args.model, MODELFILE).await;
     }
 
     let content = fs::read_to_string(&args.document).unwrap();
 
+    println!("[INFO] Generating keywords for {:?} using the model {}", &args.document.as_path(), &args.model);
     let res = generation::gen_keywords(&ollama, &args.model, &content)
         .await
         .unwrap();
