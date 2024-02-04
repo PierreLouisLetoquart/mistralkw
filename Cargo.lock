@@ -520,8 +520,6 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "ollama-rs",
- "serde",
- "serde_json",
  "tokio",
 ]
 
