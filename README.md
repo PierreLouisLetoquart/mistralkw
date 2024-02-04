@@ -1,4 +1,4 @@
-# mixtralkw
+# mistralkw
 
 ![tabarnouche](./assets/IILiiiiIIIIiiLlllll.png)
 
