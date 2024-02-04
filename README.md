@@ -15,8 +15,8 @@ https://ollama.ai/
 Clone the project :
 
 ```bash
-git clone git@github.com:PierreLouisLetoquart/mixtralkw.git
-cd mixtralkw
+git clone git@github.com:PierreLouisLetoquart/mistralkw.git
+cd mistralkw
 ```
 
 Run the program with fake content :
