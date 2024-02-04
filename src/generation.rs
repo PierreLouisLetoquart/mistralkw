@@ -5,8 +5,6 @@ use ollama_rs::generation::completion::request::GenerationRequest;
 use ollama_rs::generation::format::FormatType;
 use ollama_rs::Ollama;
 
-use serde_json;
-
 // generate the keywords list from a given document. Returns a json object stringified
 pub async fn gen_keywords(
     ollama: &Ollama,
@@ -18,8 +16,7 @@ pub async fn gen_keywords(
     let res = ollama.generate(req).await;
 
     if let Ok(res) = res {
-        let j = serde_json::to_string(&res.response)?;
-        Ok(j)
+        Ok(res.response)
     } else {
         return Err("An error occured during the generation".into());
     }

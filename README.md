@@ -29,7 +29,7 @@ Storing the result in a file :
 cargo run -- \
 -m model-keyword:latest \
 -d ./assets/content.md \
--o ./assets/keywords.txt
+-o ./assets/keywords.json
 ```
 
 To see available options :
