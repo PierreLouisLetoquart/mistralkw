@@ -1,7 +1,5 @@
 # mistralkw
 
-![tabarnouche](./assets/IILiiiiIIIIiiLlllll.png)
-
 The simplest way to create your custom Mistral LLM. Let's build a keyword generator for your documents. It will be a simple Rust program that takes as input a text document and outputs a formatted list of keywords describing it.
 
 ## 🔗 Prerequisites
@@ -31,7 +29,7 @@ Storing the result in a file :
 cargo run -- \
 -m model-keyword:latest \
 -d ./assets/content.md \
--o ./assets/keywords.json
+-o ./assets/keywords.txt
 ```
 
 To see available options :
