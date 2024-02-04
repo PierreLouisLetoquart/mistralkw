@@ -19,13 +19,6 @@ git clone git@github.com:PierreLouisLetoquart/mixtralkw.git
 cd mixtralkw
 ```
 
-Create the model :
-
-```bash
-ollama create model-keyword -f ./assets/Modelfile
-ollama list
-```
-
 Run the program with fake content :
 
 ```bash
@@ -63,6 +56,8 @@ ollama create <model-name> -f </path/to/Modelfile>
 
 Great! To test the result, enter the command `ollama list` to see if the model has been created. You can also execute `ollama run <model-name>` and play with it in your command prompt.
 
+> In the rust implementation, the main function will check if the model exists before running the program. If not, it will create it.
+
 ### Usage with Rust
 
 This document is part of a Rust project, so the programmed logic is done in Rust. Feel free to implement your own logic in the language you like the most.
@@ -77,13 +72,16 @@ model = args[1] # The name of the model created
 path = args[2] # The document to extract keywords from
 
 if !model_exists(model):
-  print_error()
+  cerate_model(model)
 
 prompt = read_file_to_str(document_path)
 
 res = ollama_exec(model, prompt)
 
-print(res) # res can be serialized or whatever...
+if args[3].exists():
+  write_to_file(args[3], res) # args[3] is the output file path (optional)
+else:
+  print(res)
 ```
 
 Check `src/main.rs` for the Rust implementation; a bit bad but feel free to PR ;).
@@ -91,5 +89,5 @@ Check `src/main.rs` for the Rust implementation; a bit bad but feel free to PR ;
 To run the program, replace the following command with your args:
 
 ```bash
-cargo run -- -m MODEL -d DOC_PATH
+cargo run -- -m MODEL -d DOC_PATH -o OUTPUT_PATH(optional)
 ```

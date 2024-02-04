@@ -527,6 +527,8 @@ dependencies = [
  "anyhow",
  "clap",
  "ollama-rs",
+ "serde",
+ "serde_json",
  "tokio",
 ]
 
