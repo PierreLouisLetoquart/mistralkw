@@ -29,7 +29,7 @@ async fn main() {
 
     let content = fs::read_to_string(&args.document).unwrap();
 
-    println!("[INFO] Generating keywords for {:?} using the model {}", &args.document.as_path(), &args.model);
+    println!("[INFO] Generating keywords for {:?} using the model {}", &args.document.as_os_str(), &args.model);
     let res = generation::gen_keywords(&ollama, &args.model, &content)
         .await
         .unwrap();
@@ -37,6 +37,7 @@ async fn main() {
     match &args.output {
         Some(path) => {
             fs::write(&path, res).unwrap();
+            eprintln!("[INFO] Keywords written into {:?}", path.as_os_str());
         }
         None => println!("{}", res),
     }
